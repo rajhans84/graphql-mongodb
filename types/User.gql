@@ -2,5 +2,7 @@ type User {
     name: String!
     email: String!
     posts: [Post!] @hasMany(as: "author")
-    liked: [Post!] @belongsToMany
+    likes: [Like!] @hasMany(as: "author")
+    comments: [Comment!] @hasMany(as: "author")
+    files: [File!] @belongsToMany
 }
