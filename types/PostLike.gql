@@ -1,0 +1,5 @@
+type PostLike {
+    author: User!
+    post: Post!
+    isLike: Boolean!
+}

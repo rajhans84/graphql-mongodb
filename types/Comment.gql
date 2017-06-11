@@ -1,0 +1,6 @@
+type Comment {
+    body: String!
+    author: User!
+    post: Post!
+    likes: CommentLike @hasMany(as: "comment")
+}
