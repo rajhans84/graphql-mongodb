@@ -1,5 +1,0 @@
-type CommentLike {
-    author: User!
-    post: Comment!
-    isLike: Boolean!
-}
