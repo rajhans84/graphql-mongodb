@@ -1,0 +1,37 @@
+type Comment {
+  id: ObjID!
+  body: String!
+  author: User!
+  post: Post
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  comments(lastCreatedAt: Float, limit: Int): [Comment!]
+  comment(id: ObjID!): Comment
+}
+
+input CreateCommentInput {
+  body: String!
+  authorId: ObjID!
+  postId: ObjID
+}
+
+input UpdateCommentInput {
+  body: String!
+  authorId: ObjID!
+  postId: ObjID
+}
+
+extend type Mutation {
+  createComment(input: CreateCommentInput!): Comment
+  updateComment(id: ObjID!, input: UpdateCommentInput!): Comment
+  removeComment(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  commentCreated: Comment
+  commentUpdated: Comment
+  commentRemoved: ObjID
+}

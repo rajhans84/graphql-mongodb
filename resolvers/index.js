@@ -23,3 +23,18 @@ resolvers.ObjID = new GraphQLScalarType({
 });
 
 export default resolvers;
+
+import userResolvers from './User';
+merge(resolvers, userResolvers);
+
+import fileResolvers from './File';
+merge(resolvers, fileResolvers);
+
+import postResolvers from './Post';
+merge(resolvers, postResolvers);
+
+import commentResolvers from './Comment';
+merge(resolvers, commentResolvers);
+
+import likeResolvers from './Like';
+merge(resolvers, likeResolvers);

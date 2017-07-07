@@ -7,3 +7,18 @@ export default function addModelsToContext(context) {
   });
   return newContext;
 }
+
+import User from './User';
+models.User = User;
+
+import File from './File';
+models.File = File;
+
+import Post from './Post';
+models.Post = Post;
+
+import Comment from './Comment';
+models.Comment = Comment;
+
+import Like from './Like';
+models.Like = Like;
