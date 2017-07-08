@@ -2,6 +2,7 @@ type User {
   id: ObjID!
   name: String!
   email: String!
+  bio: String
   posts(lastCreatedAt: Float, limit: Int): [Post]
   likes(lastCreatedAt: Float, limit: Int): [Like]
   comments(lastCreatedAt: Float, limit: Int): [Comment]
@@ -18,11 +19,14 @@ extend type Query {
 input CreateUserInput {
   name: String!
   email: String!
+  password: String!
+  bio: String
 }
 
 input UpdateUserInput {
   name: String!
   email: String!
+  bio: String
 }
 
 extend type Mutation {

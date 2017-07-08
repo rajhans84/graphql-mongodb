@@ -55,7 +55,12 @@ async function startServer() {
           schema,
           context: Object.assign({ user }, req.context),
           debug: true,
-          formatError(e) { console.log(e) },
+          formatError: error => ({
+            message: error.message,
+            locations: error.locations,
+            stack: error.stack,
+            path: error.path
+          }),
         };
       })(req, res, next);
     })(req, res, next);
@@ -83,7 +88,7 @@ async function startServer() {
     {
       subscriptionManager,
 
-      // the obSubscribe function is called for every new subscription
+      // the onSubscribe function is called for every new subscription
       // and we use it to set the GraphQL context for this subscription
       onSubscribe: (msg, params) => {
         return Object.assign({}, params, {

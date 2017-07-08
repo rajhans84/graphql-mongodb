@@ -1,5 +1,8 @@
 import DataLoader from 'dataloader';
 import findByIds from 'mongo-find-by-ids';
+import bcrypt from 'bcrypt';
+// Set this as appropriate
+const SALT_ROUNDS = 10;
 
 export default class User {
   constructor(context) {
@@ -48,13 +51,17 @@ export default class User {
   }
 
   async insert(doc) {
-    const docToInsert = Object.assign({}, doc, {
+    // We don't want to store passwords plaintext!
+    const { password, ...rest } = doc;
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
+    const docToInsert = Object.assign({}, rest, {
+      hash,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     });
-    const id = (await this.collection.insertOne(docToInsert)).insertedId;
-    this.pubsub.publish('userInserted', await this.findOneById(id));
-    return id;
+      const id = (await this.collection.insertOne(docToInsert)).insertedId;    
+      this.pubsub.publish('userInserted', await this.findOneById(id));
+      return id;
   }
 
   async updateById(id, doc) {
