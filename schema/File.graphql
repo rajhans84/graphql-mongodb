@@ -1,0 +1,45 @@
+type File {
+  id: ObjID!
+  url: String!
+  author: User!
+  post: Post!
+  type: FileType!
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  files(lastCreatedAt: Float, limit: Int): [File!]
+  file(id: ObjID!): File
+}
+
+input CreateFileInput {
+  url: String!
+  authorId: ObjID!
+  postId: ObjID!
+  type: FileType!
+}
+
+input UpdateFileInput {
+  url: String!
+  authorId: ObjID!
+  postId: ObjID!
+  type: FileType!
+}
+
+extend type Mutation {
+  createFile(input: CreateFileInput!): File
+  updateFile(id: ObjID!, input: UpdateFileInput!): File
+  removeFile(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  fileCreated: File
+  fileUpdated: File
+  fileRemoved: ObjID
+}
+enum FileType{
+    IMAGE
+    VIDEO
+    AUDIO
+}

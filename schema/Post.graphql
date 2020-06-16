@@ -1,0 +1,46 @@
+type Post {
+  id: ObjID!
+  author: User!
+  body: String!
+  published: Boolean!
+  likes(lastCreatedAt: Float, limit: Int): [Like]
+  comments(lastCreatedAt: Float, limit: Int): [Comment]
+  files(lastCreatedAt: Float, limit: Int): [File]
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  posts(lastCreatedAt: Float, limit: Int): [Post!]
+  post(id: ObjID!): Post
+}
+
+input CreatePostInput {
+  authorId: ObjID!
+  body: String!
+  published: Boolean!
+  likesId: ObjID
+  commentsId: ObjID
+  filesId: ObjID
+}
+
+input UpdatePostInput {
+  authorId: ObjID!
+  body: String!
+  published: Boolean!
+  likesId: ObjID
+  commentsId: ObjID
+  filesId: ObjID
+}
+
+extend type Mutation {
+  createPost(input: CreatePostInput!): Post
+  updatePost(id: ObjID!, input: UpdatePostInput!): Post
+  removePost(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  postCreated: Post
+  postUpdated: Post
+  postRemoved: ObjID
+}

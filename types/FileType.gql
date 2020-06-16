@@ -1,0 +1,13 @@
+enum FileType{
+    IMAGE
+    VIDEO
+    AUDIO
+}
+enum Reaction {
+    LIKE
+    DISLIKE
+}
+enum Likable {
+    POST
+    COMMENT
+}

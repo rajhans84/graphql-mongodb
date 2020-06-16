@@ -1,0 +1,5 @@
+type Comment {
+    body: String!
+    author: User!
+    post: Post
+}

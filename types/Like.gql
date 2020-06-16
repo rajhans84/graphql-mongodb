@@ -1,0 +1,5 @@
+type Like {
+    author: User!
+    post: Post!
+    reaction: Reaction! @enum
+}

@@ -1,0 +1,41 @@
+type Like {
+  id: ObjID!
+  author: User!
+  post: Post!
+  reaction: Reaction!
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  likes(lastCreatedAt: Float, limit: Int): [Like!]
+  like(id: ObjID!): Like
+}
+
+input CreateLikeInput {
+  authorId: ObjID!
+  postId: ObjID!
+  reaction: Reaction!
+}
+
+input UpdateLikeInput {
+  authorId: ObjID!
+  postId: ObjID!
+  reaction: Reaction!
+}
+
+extend type Mutation {
+  createLike(input: CreateLikeInput!): Like
+  updateLike(id: ObjID!, input: UpdateLikeInput!): Like
+  removeLike(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  likeCreated: Like
+  likeUpdated: Like
+  likeRemoved: ObjID
+}
+enum Reaction {
+    LIKE
+    DISLIKE
+}

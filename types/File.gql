@@ -1,0 +1,6 @@
+type File {
+    url: String!
+    author: User!
+    post: Post!
+    type: FileType! @enum
+}

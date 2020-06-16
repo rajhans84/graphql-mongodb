@@ -1,0 +1,8 @@
+type Post {
+    author: User!
+    body: String!
+    published: Boolean!
+    likes: Like @hasMany(as: "post")
+    comments: Comment @hasMany(as: "post")
+    files: File @belongsToMany(as: "post")
+}
